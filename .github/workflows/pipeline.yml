@@ -31,6 +31,11 @@ jobs:
           command: npm run test:e2e
           start: npm start
           wait-on: http://localhost:5000
+      - name: build-artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: build
+          path: "dist/*"
   deploy:
     if: ${{ github.event_name == 'push' && contains( join(github.event.commits.*.message, ', '), '#skip' ) == false }}
     name: Deploy app
